@@ -1,0 +1,34 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://dk6rkgmefm4jb"
+path="res://.godot/imported/bman-right.png-2ec1ee0d034b01f693162bf9717390ee.ctex"
+metadata={
+"vram_texture": false
+}
+
+[deps]
+
+source_file="res://Atomic Punk - files/Atomic Punk - files/Art Assets/Character/bman-right.png"
+dest_files=["res://.godot/imported/bman-right.png-2ec1ee0d034b01f693162bf9717390ee.ctex"]
+
+[params]
+
+compress/mode=0
+compress/high_quality=false
+compress/lossy_quality=0.7
+compress/hdr_compression=1
+compress/normal_map=0
+compress/channel_pack=0
+mipmaps/generate=false
+mipmaps/limit=-1
+roughness/mode=0
+roughness/src_normal=""
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/normal_map_invert_y=false
+process/hdr_as_srgb=false
+process/hdr_clamp_exposure=false
+process/size_limit=0
+detect_3d/compress_to=1
