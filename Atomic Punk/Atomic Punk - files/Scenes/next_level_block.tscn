@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://b6wvmhsd6nscc"]
+
+[ext_resource type="Script" path="res://Atomic Punk - files/Scripts/next_level_block.gd" id="1_apvgj"]
+[ext_resource type="Texture2D" uid="uid://bve3pb6cses7b" path="res://Atomic Punk - files/Art Assets/Tiles/blocos.png" id="2_epvhj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e5sgg"]
+size = Vector2(16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_26buo"]
+size = Vector2(48, 48)
+
+[node name="next_level_block" type="StaticBody2D"]
+script = ExtResource("1_apvgj")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 3
+collision_mask = 39
+
+[node name="area_collision" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_e5sgg")
+
+[node name="next_level_spawn" type="Marker2D" parent="Area2D"]
+unique_name_in_owner = true
+
+[node name="collision" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_26buo")
+debug_color = Color(0.654902, 0.407843, 0.819608, 0.419608)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(3, 3)
+texture = ExtResource("2_epvhj")
+hframes = 5
+vframes = 5
+frame = 10
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered" flags=18]

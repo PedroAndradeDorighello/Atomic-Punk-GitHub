@@ -1,0 +1,45 @@
+[gd_scene load_steps=7 format=3 uid="uid://cd5iirjqfjwnh"]
+
+[ext_resource type="Texture2D" uid="uid://bve3pb6cses7b" path="res://Atomic Punk - files/Art Assets/Tiles/blocos.png" id="1_2xygf"]
+[ext_resource type="Script" path="res://Atomic Punk - files/Scripts/explosion_block.gd" id="1_hbcgq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e5sgg"]
+size = Vector2(16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_26buo"]
+size = Vector2(48, 48)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_4qf4y"]
+blend_mode = 1
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_vaw2i"]
+polygon = PackedVector2Array(-24, -12, -21, -12, -21, -15, -15, -15, -15, -18, 15, -18, 15, -15, 21, -15, 21, -12, 24, -12, 24, 24, -24, 24)
+
+[node name="explosion_block" type="StaticBody2D"]
+script = ExtResource("1_hbcgq")
+
+[node name="Area2D" type="Area2D" parent="." groups=["block"]]
+collision_mask = 39
+
+[node name="area_collision" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_e5sgg")
+
+[node name="explosion_spawn" type="Marker2D" parent="Area2D"]
+unique_name_in_owner = true
+
+[node name="collision" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_26buo")
+debug_color = Color(0.654902, 0.407843, 0.819608, 0.419608)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(3, 3)
+texture = ExtResource("1_2xygf")
+hframes = 5
+vframes = 5
+frame = 12
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+material = SubResource("CanvasItemMaterial_4qf4y")
+occluder = SubResource("OccluderPolygon2D_vaw2i")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

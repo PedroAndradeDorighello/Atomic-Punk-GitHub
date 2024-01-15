@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://bd1uro2lrvhcd"]
+
+[ext_resource type="Script" path="res://Atomic Punk - files/Scripts/upgrade_bomb_timer.gd" id="1_li1jh"]
+[ext_resource type="Texture2D" uid="uid://dq0jyr3l0wrfw" path="res://Atomic Punk - files/Art Assets/Props/upgrades.png" id="1_q6qxh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bpegj"]
+size = Vector2(32, 32)
+
+[node name="upgrade_bomb_timer" type="Area2D"]
+collision_layer = 128
+collision_mask = 113
+script = ExtResource("1_li1jh")
+
+[node name="colision" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_bpegj")
+debug_color = Color(0.709804, 0.313726, 0.00392157, 0.419608)
+
+[node name="animation" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
+texture = ExtResource("1_q6qxh")
+hframes = 5
+frame = 1
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]

@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://rk88t0kuy6bb"]
+
+[ext_resource type="Script" path="res://Atomic Punk - files/Scripts/next_level_cave.gd" id="1_fbh71"]
+[ext_resource type="Texture2D" uid="uid://bve3pb6cses7b" path="res://Atomic Punk - files/Art Assets/Tiles/blocos.png" id="2_jl08f"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mx0ux"]
+size = Vector2(21.3333, 21.3333)
+
+[node name="next_level_cave" type="Area2D"]
+scale = Vector2(1.5, 1.5)
+collision_mask = 113
+script = ExtResource("1_fbh71")
+
+[node name="collision" type="CollisionShape2D" parent="."]
+position = Vector2(4.76837e-07, -4.76837e-07)
+shape = SubResource("RectangleShape2D_mx0ux")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
+texture = ExtResource("2_jl08f")
+hframes = 5
+vframes = 5
+frame = 15
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

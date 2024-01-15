@@ -1,0 +1,120 @@
+[gd_scene load_steps=12 format=3 uid="uid://c1xcck6fxi0l3"]
+
+[ext_resource type="Texture2D" uid="uid://cn4aufams1sa2" path="res://Atomic Punk - files/Art Assets/Hazards/explosion.png" id="1_mh3rh"]
+[ext_resource type="Script" path="res://Atomic Punk - files/Scripts/explosion.gd" id="1_ur55e"]
+[ext_resource type="Texture2D" uid="uid://vs4pss17jucs" path="res://Atomic Punk - files/Art Assets/Effects/light.jpg" id="2_qjy75"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_1qs43"]
+blend_mode = 1
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mh6ln"]
+size = Vector2(38, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eeihn"]
+atlas = ExtResource("1_mh3rh")
+region = Rect2(48, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cauud"]
+atlas = ExtResource("1_mh3rh")
+region = Rect2(0, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ynryy"]
+atlas = ExtResource("1_mh3rh")
+region = Rect2(24, 0, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_546rv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eeihn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cauud")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ynryy")
+}],
+"loop": true,
+"name": &"explosion",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ve4u8"]
+size = Vector2(43, 38)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3ttsj"]
+size = Vector2(38, 43)
+
+[node name="explosion" type="Area2D" groups=["explosion"]]
+top_level = true
+light_mask = 7
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_ur55e")
+
+[node name="main_light" type="PointLight2D" parent="."]
+light_mask = 5
+material = SubResource("CanvasItemMaterial_1qs43")
+color = Color(0.835294, 0.454902, 0, 1)
+energy = 4.0
+range_item_cull_mask = 5
+texture = ExtResource("2_qjy75")
+texture_scale = 1.5
+
+[node name="collision" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("RectangleShape2D_mh6ln")
+
+[node name="animation" type="AnimatedSprite2D" parent="."]
+light_mask = 4
+visibility_layer = 4
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_546rv")
+animation = &"explosion"
+
+[node name="Area2D" type="Area2D" parent="." groups=["explosion"]]
+light_mask = 4
+collision_layer = 68
+collision_mask = 25
+
+[node name="collision1" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0.299999, 0)
+scale = Vector2(2.8, 1)
+shape = SubResource("RectangleShape2D_ve4u8")
+debug_color = Color(0.843137, 0.301961, 0.584314, 0.419608)
+
+[node name="collision2" type="CollisionShape2D" parent="Area2D"]
+scale = Vector2(1, 2.8)
+shape = SubResource("RectangleShape2D_3ttsj")
+
+[node name="animation1_1" type="AnimatedSprite2D" parent="Area2D"]
+unique_name_in_owner = true
+light_mask = 4
+position = Vector2(43, 0)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_546rv")
+animation = &"explosion"
+
+[node name="animation1_2" type="AnimatedSprite2D" parent="Area2D"]
+unique_name_in_owner = true
+light_mask = 4
+position = Vector2(-43, 0)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_546rv")
+animation = &"explosion"
+
+[node name="animation2_1" type="AnimatedSprite2D" parent="Area2D"]
+unique_name_in_owner = true
+light_mask = 4
+position = Vector2(0, 43)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_546rv")
+animation = &"explosion"
+
+[node name="animation2_2" type="AnimatedSprite2D" parent="Area2D"]
+unique_name_in_owner = true
+light_mask = 4
+position = Vector2(0, -42)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_546rv")
+animation = &"explosion"

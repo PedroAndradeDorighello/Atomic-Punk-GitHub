@@ -1,0 +1,90 @@
+[gd_scene load_steps=10 format=3 uid="uid://jbwjf2uthb3r"]
+
+[ext_resource type="Script" path="res://Atomic Punk - files/Scripts/skeleton.gd" id="1_7stqw"]
+[ext_resource type="Texture2D" uid="uid://8pc5xnfxtwxg" path="res://Atomic Punk - files/Art Assets/Hazards/skeleton.png" id="2_eg6yn"]
+[ext_resource type="PackedScene" uid="uid://dfviuv4kvgv2w" path="res://Atomic Punk - files/Scenes/hitbox.tscn" id="3_b5582"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_agqhe"]
+radius = 10.1
+height = 39.35
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eb426"]
+atlas = ExtResource("2_eg6yn")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gits4"]
+atlas = ExtResource("2_eg6yn")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ep4eo"]
+atlas = ExtResource("2_eg6yn")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0i5dn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eb426")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eb426")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gits4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eb426")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ep4eo")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7j540"]
+size = Vector2(32, 47)
+
+[node name="skeleton" type="CharacterBody2D" groups=["enemies"]]
+collision_layer = 4
+collision_mask = 79
+script = ExtResource("1_7stqw")
+
+[node name="collision" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_agqhe")
+debug_color = Color(0, 0.6, 0.701961, 0.419608)
+
+[node name="animation" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_0i5dn")
+animation = &"walk"
+
+[node name="animator" type="AnimationPlayer" parent="."]
+
+[node name="wall_detector" type="RayCast2D" parent="."]
+target_position = Vector2(12, 0)
+collision_mask = 39
+
+[node name="wall_detector2" type="RayCast2D" parent="."]
+target_position = Vector2(14.69, 20.05)
+collision_mask = 2
+
+[node name="wall_detector3" type="RayCast2D" parent="."]
+target_position = Vector2(14.455, -19.095)
+collision_mask = 2
+
+[node name="hitbox" parent="." groups=["hitbox"] instance=ExtResource("3_b5582")]
+collision_mask = 112
+
+[node name="collision_hitbox" type="CollisionShape2D" parent="hitbox"]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_7j540")
+debug_color = Color(0.611765, 0.4, 0.921569, 0.419608)
+
+[connection signal="area_entered" from="hitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="body_entered" from="hitbox" to="." method="_on_hitbox_body_entered"]

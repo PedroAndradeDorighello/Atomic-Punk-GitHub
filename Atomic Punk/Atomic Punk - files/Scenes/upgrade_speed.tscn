@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://c4edp2fj5mi25"]
+
+[ext_resource type="Script" path="res://Atomic Punk - files/Scripts/upgrade_speed.gd" id="1_gt3bs"]
+[ext_resource type="Texture2D" uid="uid://dq0jyr3l0wrfw" path="res://Atomic Punk - files/Art Assets/Props/upgrades.png" id="1_rfnud"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6jnu1"]
+size = Vector2(32, 32)
+
+[node name="upgrade-speed" type="Area2D"]
+collision_layer = 128
+collision_mask = 113
+script = ExtResource("1_gt3bs")
+
+[node name="colision" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_6jnu1")
+debug_color = Color(0.294118, 0.627451, 0.0745098, 0.419608)
+
+[node name="animation" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
+texture = ExtResource("1_rfnud")
+hframes = 5
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]
